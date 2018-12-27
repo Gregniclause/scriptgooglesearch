@@ -1,0 +1,24 @@
+/**
+*
+*
+* @customfunction
+*/
+function findurl(x) {
+
+  var searchResults=UrlFetchApp.fetch("https://www.google.fr/search?q="+x,{muteHttpExceptions:true});
+  
+  var urlExpression=/<h3 class=\"r\">([\s\S]*?)\&amp\;/gi;
+
+
+  var urlResults=searchResults.getContentText().match(urlExpression);
+
+
+  // To get the actual URL
+for(var i in urlResults)
+    {
+    
+    
+    var actualURL=urlResults[i].replace('<h3 class="r"><a href="/url?q=',"").replace('&amp;',"");
+     Logger.log(actualURL)
+    return actualURL;  
+   }
